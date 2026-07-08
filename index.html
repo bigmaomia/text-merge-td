@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>赵云与阿斗 — 文字合成塔防</title>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- 主菜单 -->
+<div id="menu-screen" class="screen active">
+  <div class="game-title">赵云与阿斗</div>
+  <div class="game-subtitle">文字合成策略塔防</div>
+  <button class="menu-btn" id="btn-start">开始战役</button>
+  <button class="menu-btn secondary">武将养成</button>
+  <button class="menu-btn secondary">商店</button>
+  <button class="menu-btn secondary">图鉴</button>
+</div>
+
+<!-- 章节选择 -->
+<div id="chapter-select-screen" class="screen">
+  <h2>选择章节</h2>
+  <div class="chapter-list" id="chapter-select"></div>
+  <button class="back-btn" id="btn-back-menu">← 返回主菜单</button>
+</div>
+
+<!-- 战斗界面 -->
+<div id="battle-screen" class="screen">
+  <div id="hud">
+    <div class="hud-left">
+      <span id="hud-wave">波次 1/5</span>
+      <span id="hud-gold">💰0</span>
+    </div>
+    <div class="hud-right">
+      <span id="hud-hp">阿斗 ❤️×10</span>
+      <div id="adou-hp-bar"><div id="adou-hp-fill"></div></div>
+      <button id="btn-pause">⏸</button>
+    </div>
+  </div>
+  <canvas id="battle-canvas"></canvas>
+  <div id="skill-bar"></div>
+</div>
+
+<!-- 暂停 -->
+<div id="pause-overlay">
+  <h2>⏸ 暂停</h2>
+  <button class="menu-btn" id="btn-resume">继续游戏</button>
+  <button class="menu-btn secondary" id="btn-quit">退出</button>
+</div>
+
+<!-- 结算 -->
+<div id="result-screen" class="screen">
+  <div class="result-title" id="result-title">🎉 胜利！</div>
+  <div id="result-stars">⭐⭐⭐</div>
+  <div class="result-stat">获得金币: <span id="result-gold">0</span></div>
+  <div class="result-stat">消灭敌人: <span id="result-kills">0</span></div>
+  <div class="result-buttons">
+    <button class="menu-btn" id="btn-retry">再来一局</button>
+    <button class="menu-btn secondary" id="btn-menu">返回主菜单</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Scripts -->
+<script src="js/config.js"></script>
+<script src="js/game-core.js"></script>
+<script src="js/battle-renderer.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

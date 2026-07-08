@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=750">
+<title>结算界面 · 赵云与阿斗</title>
+<link rel="stylesheet" href="style-guide.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#000; display:flex; justify-content:center; }
+  .screen { width:750px; height:1334px; position:relative; overflow:hidden;
+    background: linear-gradient(180deg,#243447 0%, #1A1A24 100%);
+    font-family:var(--f-body); color:var(--c-paper); }
+
+  /* 遮罩 */
+  .mask { position:absolute; inset:0; background:rgba(26,26,36,.82);
+    display:flex; align-items:center; justify-content:center; }
+  .dialog { width:630px; height:760px; background:var(--c-paper); border-radius:24px;
+    border:var(--bd); box-shadow:var(--shadow-pixel); padding:40px 32px;
+    display:flex; flex-direction:column; align-items:center; color:var(--c-night); }
+
+  .result-title { font-family:var(--f-title); font-size:var(--fs-giant); color:var(--c-red);
+    text-shadow:2px 2px 0 var(--c-gold); margin-bottom:8px; }
+  .result-sub { font-size:var(--fs-sm); color:var(--c-gray); margin-bottom:32px; }
+
+  /* 星级 */
+  .stars { display:flex; gap:24px; margin-bottom:40px; }
+  .star { width:80px; height:80px; border-radius:50%; background:var(--c-gray);
+    display:flex; align-items:center; justify-content:center; font-size:48px; color:#fff; }
+  .star.on { background:var(--c-gold); box-shadow:var(--shadow-pixel); color:#fff; }
+
+  /* 奖励 */
+  .rewards { display:flex; gap:20px; margin-bottom:48px; }
+  .reward { width:120px; height:140px; border-radius:var(--r-card); background:#fff;
+    border:var(--bd); display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:8px; }
+  .reward .ri { font-size:48px; }
+  .reward .rt { font-size:var(--fs-sm); color:var(--c-night); }
+  .reward .rn { font-family:var(--f-num); font-size:var(--fs-body); color:var(--c-red); font-weight:700; }
+
+  /* 按钮组 */
+  .actions { display:flex; gap:16px; width:100%; }
+  .actions .btn { flex:1; height:96px; }
+  .btn-double { background:var(--c-red); }
+  .btn-next { background:var(--c-gold); color:var(--c-night); }
+  .btn-retry { background:var(--c-gray); }
+  .btn-back { background:transparent; color:var(--c-ink); border-color:var(--c-gray); box-shadow:none; }
+
+  /* 失败态（示意切换 class） */
+  .screen.fail .result-title { color:var(--c-gray); text-shadow:none; }
+  .screen.fail .dialog { filter:grayscale(.4); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="mask">
+    <div class="dialog">
+      <div class="result-title">長坂坡大捷！</div>
+      <div class="result-sub">三星通关 · 解锁扫荡功能</div>
+
+      <div class="stars">
+        <div class="star on">★</div>
+        <div class="star on">★</div>
+        <div class="star on">★</div>
+      </div>
+
+      <div class="rewards">
+        <div class="reward"><div class="ri">💰</div><div class="rt">金币</div><div class="rn">+2350</div></div>
+        <div class="reward"><div class="ri">💎</div><div class="rt">钻石</div><div class="rn">+60</div></div>
+        <div class="reward"><div class="ri">🧩</div><div class="rt">赵云碎片</div><div class="rn">+3</div></div>
+      </div>
+
+      <div class="actions">
+        <div class="btn btn-back">返回</div>
+        <div class="btn btn-retry">重试</div>
+        <div class="btn btn-double">看广告双倍</div>
+        <div class="btn btn-next">下一关</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

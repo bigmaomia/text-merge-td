@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=750">
+<title>商店 · 赵云与阿斗</title>
+<link rel="stylesheet" href="style-guide.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#000; display:flex; justify-content:center; }
+  .screen { width:750px; height:1334px; position:relative; overflow:hidden;
+    background: linear-gradient(180deg,#2C3E50 0%, #1A1A24 100%);
+    font-family:var(--f-body); color:var(--c-paper); }
+
+  .topbar { height:88px; display:flex; align-items:center; padding:0 var(--safe-x);
+    background:rgba(26,26,36,.7); }
+  .topbar h2 { font-family:var(--f-title); font-size:var(--fs-h1); color:var(--c-gold); }
+  .topbar .bal { margin-left:auto; font-family:var(--f-num); font-size:var(--fs-body);
+    background:var(--c-purple); border:var(--bd); border-radius:var(--r-tag); padding:4px 14px; }
+
+  /* Tab */
+  .tabs { display:flex; padding:0 var(--safe-x); gap:0; background:rgba(26,26,36,.4); }
+  .tab { flex:1; text-align:center; padding:20px 0; font-family:var(--f-title);
+    font-size:var(--fs-body); color:var(--c-gray); border-bottom:4px solid transparent; }
+  .tab.on { color:var(--c-paper); border-bottom-color:var(--c-red); }
+
+  .content { padding:var(--sp-3); overflow-y:auto; height:calc(1334px - 88px - 52px - 100px); }
+
+  /* 特惠大卡 */
+  .feature { width:100%; height:200px; border-radius:var(--r-card); background:var(--c-purple);
+    border:var(--bd-gold); position:relative; overflow:hidden; margin-bottom:var(--sp-3);
+    display:flex; align-items:center; padding:var(--sp-3); box-shadow:var(--shadow-pixel); }
+  .feature .ft { font-family:var(--f-title); font-size:var(--fs-h1); color:#fff; }
+  .feature .fd { font-size:var(--fs-sm); color:var(--c-paper); margin-top:8px; }
+  .feature .ribbon { position:absolute; top:16px; right:-40px; transform:rotate(45deg);
+    background:var(--c-red); color:#fff; font-size:var(--fs-sm); padding:6px 50px; }
+  .feature .cd-timer { margin-top:12px; font-family:var(--f-num); color:var(--c-gold); }
+
+  /* 商品卡 */
+  .shop-item { display:flex; align-items:center; gap:var(--sp-2); width:100%;
+    height:160px; background:var(--c-ink); border:var(--bd); border-radius:var(--r-card);
+    padding:var(--sp-2); margin-bottom:var(--sp-2); box-shadow:var(--shadow-pixel); }
+  .shop-item .si { width:120px; height:120px; border-radius:var(--r-card); background:var(--c-jade);
+    border:var(--bd); display:flex; align-items:center; justify-content:center; font-size:56px; flex:none; }
+  .shop-item .info { flex:1; }
+  .shop-item .nm { font-family:var(--f-title); font-size:var(--fs-body); color:#fff; }
+  .shop-item .ds { font-size:var(--fs-sm); color:var(--c-gray); margin-top:6px; }
+  .shop-item .price { margin-top:8px; }
+  .shop-item .old { font-family:var(--f-num); font-size:var(--fs-sm); color:var(--c-gray);
+    text-decoration:line-through; margin-right:10px; }
+  .shop-item .now { font-family:var(--f-num); font-size:var(--fs-h2); color:var(--c-red); font-weight:700; }
+  .shop-item .buy { background:var(--c-gold); color:var(--c-night); border:var(--bd);
+    border-radius:var(--r-btn); font-family:var(--f-title); font-size:var(--fs-body);
+    padding:16px 28px; flex:none; box-shadow:var(--shadow-pixel); }
+
+  .shop-item.special .si { background:var(--c-red); }
+  .shop-item.special .buy { background:var(--c-red); color:#fff; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="topbar">
+    <h2>商店</h2>
+    <div class="bal">💎 1200</div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab on">热卖</div>
+    <div class="tab">钻石</div>
+    <div class="tab">碎片</div>
+    <div class="tab">礼包</div>
+  </div>
+
+  <div class="content">
+    <div class="feature">
+      <div class="ribbon">超值</div>
+      <div>
+        <div class="ft">新手礼包</div>
+        <div class="fd">赵云碎片×20 + 钻石×300 + 金币×50000</div>
+        <div class="cd-timer">⏳ 倒计时 02:14:33</div>
+      </div>
+    </div>
+
+    <div class="shop-item special">
+      <div class="si">💎</div>
+      <div class="info">
+        <div class="nm">钻石月卡</div>
+        <div class="ds">每日领取钻石×100 + 体力 + 招贤令×1</div>
+        <div class="price"><span class="old">¥30</span><span class="now">¥25</span></div>
+      </div>
+      <div class="buy">购买</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="si">🧩</div>
+      <div class="info">
+        <div class="nm">赵云碎片 ×10</div>
+        <div class="ds">用于武将升星</div>
+        <div class="price"><span class="old">800💎</span><span class="now">600💎</span></div>
+      </div>
+      <div class="buy">购买</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="si">📜</div>
+      <div class="info">
+        <div class="nm">招贤令 ×5</div>
+        <div class="ds">抽卡道具，概率出 SSR/UR</div>
+        <div class="price"><span class="old">300💎</span><span class="now">240💎</span></div>
+      </div>
+      <div class="buy">购买</div>
+    </div>
+
+    <div class="shop-item">
+      <div class="si">⚡</div>
+      <div class="info">
+        <div class="nm">永久免广告</div>
+        <div class="ds">去除 Banner / 插屏广告</div>
+        <div class="price"><span class="now">¥30</span></div>
+      </div>
+      <div class="buy">购买</div>
+    </div>
+  </div>
+
+  <div class="banner-ad">商店 Banner（示意）</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,334 @@
+/* 「赵云与阿斗」文字合成塔防 - 样式 */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "SimHei", sans-serif;
+  background: #0a0a1a;
+  color: #fff;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ============ 菜单界面 ============ */
+.screen {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.screen.active { display: flex; }
+
+#menu-screen {
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #2a1a3e 100%);
+}
+#menu-screen::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(255,215,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.game-title {
+  font-size: 48px;
+  font-weight: bold;
+  background: linear-gradient(180deg, #ffd700 0%, #ff8c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+}
+.game-subtitle {
+  font-size: 16px;
+  color: #aaa;
+  margin-bottom: 48px;
+  letter-spacing: 2px;
+}
+
+.menu-btn {
+  width: 200px;
+  height: 56px;
+  margin: 8px;
+  border: 2px solid rgba(255,215,0,0.4);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  color: #ffd700;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 2px;
+  backdrop-filter: blur(4px);
+}
+.menu-btn:hover {
+  background: rgba(255,215,0,0.15);
+  border-color: #ffd700;
+  transform: scale(1.05);
+}
+.menu-btn:active { transform: scale(0.95); }
+
+.menu-btn.secondary {
+  border-color: rgba(255,255,255,0.2);
+  color: #aaa;
+  font-size: 16px;
+  height: 44px;
+}
+.menu-btn.secondary:hover {
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+}
+
+/* ============ 章节选择 ============ */
+#chapter-select-screen {
+  background: linear-gradient(135deg, #0f0f2e, #1a1a3e);
+}
+#chapter-select-screen h2 {
+  font-size: 28px;
+  color: #ffd700;
+  margin-bottom: 24px;
+}
+
+.chapter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 600px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.chapter-btn {
+  width: 260px;
+  height: 56px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  color: #ddd;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chapter-btn:hover {
+  background: rgba(255,200,0,0.1);
+  border-color: rgba(255,200,0,0.4);
+  color: #ffd700;
+}
+
+.back-btn {
+  margin-top: 24px;
+  padding: 10px 30px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+}
+.back-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+/* ============ 战斗界面 ============ */
+#battle-screen {
+  background: #0a0a1a;
+  flex-direction: column;
+}
+
+#battle-canvas {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: calc(100vh - 140px);
+  cursor: pointer;
+}
+
+/* HUD */
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  font-size: 13px;
+}
+
+.hud-left, .hud-right {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+#hud-wave { color: #ffd700; font-weight: bold; }
+#hud-gold { color: #ffcc00; }
+#hud-hp { color: #ff6666; }
+
+#adou-hp-bar {
+  width: 80px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+#adou-hp-fill {
+  height: 100%;
+  width: 100%;
+  background: #00cc00;
+  border-radius: 3px;
+  transition: width 0.3s, background 0.3s;
+}
+
+#btn-pause {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* 技能栏 */
+#skill-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.skill-btn {
+  width: 58px;
+  height: 58px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.skill-btn:hover:not(.on-cd) {
+  border-color: rgba(255,215,0,0.5);
+  background: rgba(255,215,0,0.1);
+}
+.skill-btn.on-cd {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.skill-icon {
+  font-size: 24px;
+}
+.skill-cd {
+  position: absolute;
+  bottom: 4px;
+  font-size: 10px;
+  color: #ff6666;
+  font-weight: bold;
+}
+
+/* ============ 暂停层 ============ */
+#pause-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+#pause-overlay.active { display: flex; }
+#pause-overlay h2 { font-size: 32px; color: #ffd700; margin-bottom: 16px; }
+
+/* ============ 结算界面 ============ */
+#result-screen {
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  gap: 16px;
+}
+#result-screen.active { display: flex; }
+
+.result-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.result-title.win { color: #ffd700; }
+.result-title.lose { color: #ff4444; }
+
+#result-stars {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.result-stat {
+  font-size: 18px;
+  color: #ccc;
+  margin: 4px 0;
+}
+.result-stat span { color: #ffd700; font-weight: bold; }
+
+.result-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* ============ Toast ============ */
+#toast {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.8);
+  color: #ffd700;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  border: 1px solid rgba(255,215,0,0.3);
+}
+#toast.show { opacity: 1; }
+
+/* ============ 响应式 ============ */
+@media (max-width: 600px) {
+  .game-title { font-size: 32px; }
+  .menu-btn { width: 160px; height: 48px; font-size: 17px; }
+  .chapter-btn { width: 90%; }
+  .skill-btn { width: 48px; height: 48px; }
+  .skill-icon { font-size: 20px; }
+  #skill-bar { gap: 4px; padding: 8px; }
+}

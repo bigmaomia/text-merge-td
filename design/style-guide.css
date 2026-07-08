@@ -1,0 +1,126 @@
+/* ============================================================
+   文字合成塔防 — 通用设计变量 & 组件样式（设计稿 750×1334 @2x）
+   供思思在 Cocos Creator / Web 原型中直接引用
+   ============================================================ */
+
+:root {
+  /* ---- 色彩体系 ---- */
+  --c-red:        #C0392B; /* 战旗红 主色 */
+  --c-gold:       #E0A82E; /* 暮金 辅色 */
+  --c-ink:        #2C3E50; /* 墨青 面板底 */
+  --c-jade:       #3E8E7E; /* 竹青 成功/技能 */
+  --c-purple:     #6C5B7B; /* 烽烟紫 武将/法术 */
+  --c-night:      #1A1A24; /* 玄夜 战场底/描边 */
+  --c-gray:       #8A8A99; /* 灰岩 禁用/次要 */
+  --c-paper:      #F5EFE0; /* 宣纸 卡片面 */
+  --c-warn:       #E67E22; /* 警报橙 受击 */
+  --c-danger:     #E74C3C; /* 败血红 失败/扣血 */
+
+  /* ---- 字体 ---- */
+  --f-title: "ZCOOL KuaiLe", "STKaiti", sans-serif;       /* 站酷快乐体 标题 */
+  --f-body:  "Source Han Sans CN", "PingFang SC", sans-serif; /* 正文 */
+  --f-num:   "DIN", "Orbitron", monospace;                 /* 数字等宽 */
+
+  /* ---- 字号阶梯 (px @2x) ---- */
+  --fs-giant: 56px; /* 巨标题 */
+  --fs-h1:    40px; /* 大标题 */
+  --fs-h2:    32px; /* 中标题 */
+  --fs-body:  28px; /* 正文 */
+  --fs-sm:    24px; /* 小字 */
+  --fs-xs:    20px; /* 微字 */
+
+  /* ---- 间距 (8px 网格) ---- */
+  --sp-1: 8px;  --sp-2: 16px; --sp-3: 24px;
+  --sp-4: 32px; --sp-6: 48px;
+
+  /* ---- 圆角 ---- */
+  --r-panel: 16px; --r-btn: 12px; --r-card: 12px; --r-tag: 8px;
+
+  /* ---- 描边 & 投影 ---- */
+  --bd: 2px solid var(--c-night);
+  --bd-strong: 3px solid var(--c-red);
+  --bd-gold: 3px solid var(--c-gold);
+  --shadow-pixel: 0 4px 0 rgba(0,0,0,.25); /* 像素硬投影，禁用模糊 */
+
+  /* ---- 布局基准 ---- */
+  --safe-x: 24px;
+  --top-bar: 88px;
+  --banner-h: 100px;
+}
+
+/* ---- 通用组件 ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 96px; border-radius: var(--r-btn);
+  font-family: var(--f-title); font-size: var(--fs-h2); color: #fff;
+  border: var(--bd); box-shadow: var(--shadow-pixel);
+}
+.btn-primary { background: var(--c-red); }
+.btn-gold    { background: var(--c-gold); }
+.btn-ink     { background: var(--c-ink); }
+.btn-ghost   { background: transparent; color: var(--c-paper); border-color: var(--c-gray); box-shadow:none; }
+
+.panel {
+  background: var(--c-ink); border-radius: var(--r-panel);
+  border: var(--bd); box-shadow: var(--shadow-pixel);
+}
+.card {
+  background: var(--c-paper); border-radius: var(--r-card);
+  border: var(--bd); box-shadow: var(--shadow-pixel);
+}
+
+/* 兵种文字方块：单字方块，按等级换底 */
+.unit {
+  width: 72px; height: 72px; border-radius: var(--r-tag);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-title); font-size: var(--fs-h1); color: #fff;
+  border: var(--bd); box-shadow: var(--shadow-pixel);
+}
+.unit-l1 { background: var(--c-gray); }
+.unit-l2 { background: #6b6b78; }
+.unit-l3 { background: var(--c-ink); }
+.unit-l4 { background: var(--c-jade); }
+.unit-l5 { background: #2f6f63; }
+.unit-l6 { background: var(--c-purple); }
+.unit-l7 { background: #574a63; }
+.unit-l8 { background: #8e5ba0; }
+.unit-l9 { background: #a85fb0; }
+.unit-l10{ background: var(--c-gold); border: var(--bd-gold); color: var(--c-night); }
+
+/* 状态条 / 血条 */
+.hpbar { height: 16px; border-radius: var(--r-tag); background: var(--c-night); overflow: hidden; border: var(--bd); }
+.hpbar > i { display:block; height:100%; background: var(--c-jade); }
+.hpbar.danger > i { background: var(--c-danger); }
+
+/* CD 环（用 conic-gradient 近似） */
+.cd {
+  width: 84px; height: 84px; border-radius: 50%;
+  background: var(--c-ink); border: var(--bd);
+  position: relative; display:flex; align-items:center; justify-content:center;
+  font-family: var(--f-num); font-size: var(--fs-h2); color:#fff;
+}
+.cd::after {
+  content:""; position:absolute; inset:0; border-radius:50%;
+  background: conic-gradient(rgba(26,26,36,.7) var(--cd,0deg), transparent 0);
+}
+
+/* 星级 */
+.star { width: 80px; height: 80px; border-radius: 50%; background: var(--c-gray); }
+.star.on { background: var(--c-gold); box-shadow: var(--shadow-pixel); }
+
+/* 稀有度徽章 */
+.rar { font-family: var(--f-title); font-size: var(--fs-sm); padding: 4px 12px;
+  border-radius: var(--r-tag); color:#fff; }
+.rar-SR  { background: var(--c-jade); }
+.rar-SSR { background: var(--c-gold); color: var(--c-night); }
+.rar-UR  { background: linear-gradient(135deg,var(--c-purple),var(--c-gold)); }
+
+/* Banner 广告位 */
+.banner-ad { height: var(--banner-h); background: #D9D2C2;
+  display:flex; align-items:center; justify-content:center; color: var(--c-gray);
+  font-size: var(--fs-sm); position: relative; }
+.banner-ad::before { content:"广告"; position:absolute; left:8px; top:8px;
+  font-size: var(--fs-xs); color: var(--c-gray); }
+
+/* 像素硬投影按钮按下态 */
+.btn:active, .unit:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,.25); }

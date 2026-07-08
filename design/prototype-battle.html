@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=750">
+<title>战斗界面 · 赵云与阿斗</title>
+<link rel="stylesheet" href="style-guide.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#000; display:flex; justify-content:center; }
+  .screen { width:750px; height:1334px; position:relative; overflow:hidden;
+    background: linear-gradient(180deg,#243447 0%, #1A1A24 100%);
+    font-family:var(--f-body); color:var(--c-paper); }
+
+  /* 顶部状态栏 */
+  .topbar { height:88px; display:flex; align-items:center; justify-content:space-between;
+    padding:0 var(--safe-x); background:rgba(26,26,36,.7); }
+  .wave { font-family:var(--f-title); font-size:var(--fs-body); color:var(--c-gold); }
+  .res { display:flex; gap:12px; font-family:var(--f-num); font-size:var(--fs-body); }
+  .res .pill { background:var(--c-ink); border:var(--bd); border-radius:var(--r-tag);
+    padding:4px 12px; }
+  .pause { width:56px; height:56px; border-radius:50%; background:var(--c-red);
+    border:var(--bd); display:flex; align-items:center; justify-content:center; font-size:28px; }
+
+  /* 文字掉落区 */
+  .dropzone { height:92px; margin:0 var(--safe-x); margin-top:8px; display:flex;
+    gap:16px; align-items:center; background:rgba(44,62,80,.5);
+    border:var(--bd); border-radius:var(--r-tag); padding:0 16px; }
+  .dropzone .unit.glow { box-shadow:0 0 0 3px var(--c-gold), var(--shadow-pixel); }
+  .dropzone .hint { font-size:var(--fs-sm); color:var(--c-gray); margin-left:auto; }
+
+  /* 战场网格 */
+  .battlefield { margin:12px var(--safe-x) 0; position:relative; }
+  .grid { display:grid; grid-template-columns:repeat(9,1fr); gap:6px; }
+  .cell { aspect-ratio:1/1; border-radius:var(--r-tag); background:rgba(26,26,36,.45);
+    border:1px solid rgba(245,239,224,.12); display:flex; align-items:center;
+    justify-content:center; position:relative; }
+  .cell.path { background:rgba(224,168,46,.12); border:1px dashed rgba(224,168,46,.5); }
+  .cell.held { background:rgba(62,142,126,.25); }
+  .cell .unit { width:90%; height:90%; font-size:30px; }
+  /* 阿斗格 */
+  .cell.adou { background:rgba(192,57,43,.3); border:var(--bd-strong); }
+  .adou-face { width:70%; height:70%; border-radius:50%; background:var(--c-gold);
+    border:var(--bd); display:flex; align-items:center; justify-content:center; font-size:24px; }
+  .adou-hp { position:absolute; bottom:2px; left:4px; right:4px; }
+
+  /* 敌人（示意行进） */
+  .enemy { position:absolute; width:46px; height:46px; border-radius:50%;
+    background:var(--c-danger); border:var(--bd); display:flex; align-items:center;
+    justify-content:center; font-size:20px; z-index:5; }
+  .e1 { left:30px;  top:60px; }
+  .e2 { left:180px; top:160px; }
+  .e3 { left:360px; top:300px; }
+
+  /* 技能栏 + 状态条 */
+  .bottom { position:absolute; left:0; right:0; bottom:108px; height:100px;
+    display:flex; align-items:center; padding:0 var(--safe-x); gap:24px; }
+  .skills { display:flex; gap:24px; }
+  .cd.locked { background:var(--c-gray); }
+  .cd.locked::before { content:"🔒"; position:absolute; font-size:28px; }
+  .status { margin-left:auto; text-align:right; font-family:var(--f-num); font-size:var(--fs-body); }
+  .status div { margin:2px 0; }
+
+  /* 激励视频浮动 */
+  .reward-fab { position:absolute; right:16px; top:520px; width:96px; height:96px;
+    border-radius:50%; background:var(--c-gold); border:var(--bd); color:var(--c-night);
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:var(--f-title); font-size:20px; line-height:1.1; box-shadow:var(--shadow-pixel); }
+
+  /* 阿斗受击警示层（示意） */
+  .warn-flash { position:absolute; inset:0; background:rgba(231,76,60,.3);
+    pointer-events:none; opacity:0; }
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <div class="topbar">
+    <div class="wave">波次 5 / 20</div>
+    <div class="res">
+      <div class="pill">💰 2350</div>
+      <div class="pill">💎 120</div>
+    </div>
+    <div class="pause">⏸</div>
+  </div>
+
+  <div class="dropzone">
+    <div class="unit unit-l1 glow">兵</div>
+    <div class="unit unit-l1 glow">兵</div>
+    <div class="unit unit-l3">枪</div>
+    <div class="unit unit-l2">卒</div>
+    <div class="unit unit-l4">弓</div>
+    <div class="hint">拖拽相同文字合成 ▸</div>
+  </div>
+
+  <div class="battlefield">
+    <div class="grid">
+      <!-- 5 行 × 9 列 = 45 格 -->
+      <div class="cell path"></div><div class="cell path"></div><div class="cell path"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell path"></div><div class="cell held"><div class="unit unit-l6">将</div></div><div class="cell path"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell path"></div><div class="cell"></div><div class="cell path"></div><div class="cell held"><div class="unit unit-l4">弓</div></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell path"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell adou">
+        <div class="adou-face">👶</div>
+        <div class="adou-hp hpbar"><i style="width:80%"></i></div>
+      </div>
+    </div>
+    <!-- 敌人示意 -->
+    <div class="enemy e1">🏴</div>
+    <div class="enemy e2">🏴</div>
+    <div class="enemy e3">🏴</div>
+  </div>
+
+  <div class="reward-fab">看广告<br>+3字</div>
+
+  <div class="bottom">
+    <div class="skills">
+      <div class="cd" style="--cd:0deg">🌾</div>
+      <div class="cd" style="--cd:120deg">📜</div>
+      <div class="cd locked"></div>
+    </div>
+    <div class="status">
+      <div>波次 5/20</div>
+      <div>💰2350</div>
+      <div>💎120</div>
+    </div>
+  </div>
+
+  <div class="warn-flash"></div>
+  <div class="banner-ad">战斗界面侧边/底部 Banner（示意）</div>
+</div>
+</body>
+</html>

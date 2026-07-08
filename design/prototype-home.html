@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=750">
+<title>主界面 · 赵云与阿斗</title>
+<link rel="stylesheet" href="style-guide.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#000; display:flex; justify-content:center; }
+  .screen { width:750px; height:1334px; position:relative; overflow:hidden;
+    background: linear-gradient(180deg,#3a2f4a 0%, #2C3E50 45%, #1A1A24 100%);
+    font-family:var(--f-body); color:var(--c-paper); }
+
+  /* 战旗背景装饰 */
+  .flag { position:absolute; top:120px; right:40px; width:160px; height:200px;
+    background:
+      repeating-linear-gradient(45deg,var(--c-red) 0 24px, #9c2c20 24px 48px);
+    border:var(--bd); transform:rotate(8deg); opacity:.85;
+    box-shadow:var(--shadow-pixel); }
+  .flag::before { content:"漢"; position:absolute; inset:0; display:flex;
+    align-items:center; justify-content:center; font-family:var(--f-title);
+    font-size:80px; color:#fff; }
+
+  /* 顶部栏 */
+  .topbar { height:88px; display:flex; align-items:center; justify-content:space-between;
+    padding:0 var(--safe-x); }
+  .gamename { font-family:var(--f-title); font-size:var(--fs-h2); color:var(--c-gold);
+    text-shadow:2px 2px 0 var(--c-night); }
+  .topright { display:flex; align-items:center; gap:12px; }
+  .diamond { font-family:var(--f-num); font-size:var(--fs-body); color:#fff;
+    background:var(--c-purple); border:var(--bd); border-radius:var(--r-tag);
+    padding:4px 14px; }
+  .avatar { width:56px; height:56px; border-radius:50%; background:var(--c-gold);
+    border:var(--bd); }
+
+  /* 大标题 */
+  .hero-title { text-align:center; margin-top:200px; }
+  .hero-title h1 { font-family:var(--f-title); font-size:var(--fs-giant); color:#fff;
+    text-shadow: 3px 3px 0 var(--c-red), 6px 6px 0 var(--c-night); letter-spacing:4px; }
+  .hero-title p { font-size:var(--fs-sm); color:var(--c-gold); margin-top:12px; }
+
+  /* 四大主按钮 */
+  .main-btns { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-3);
+    padding:0 var(--safe-x); margin-top:120px; }
+  .mbtn { height:150px; border-radius:var(--r-btn); border:var(--bd);
+    box-shadow:var(--shadow-pixel); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:10px; }
+  .mbtn .ico { font-size:48px; }
+  .mbtn .lab { font-family:var(--f-title); font-size:var(--fs-body); color:#fff; }
+  .mbtn.c1 { background:var(--c-red); }
+  .mbtn.c2 { background:var(--c-ink); }
+  .mbtn.c3 { background:var(--c-gold); color:var(--c-night); }
+  .mbtn.c4 { background:var(--c-jade); }
+
+  /* 底部功能栏 */
+  .footbar { position:absolute; left:0; right:0; top:1234px; height:0; }
+  .funcbar { position:absolute; left:0; right:0; top:900px; height:80px;
+    background:rgba(26,26,36,.6); display:flex; border-top:var(--bd); }
+  .func { flex:1; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:6px; font-size:var(--fs-sm); color:var(--c-paper); }
+  .func .fi { font-size:28px; }
+
+  /* Banner */
+  .banner-ad { position:absolute; left:0; right:0; bottom:0; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="flag"></div>
+
+  <div class="topbar">
+    <div class="gamename">赵云与阿斗</div>
+    <div class="topright">
+      <div class="diamond">💎 120</div>
+      <div class="avatar"></div>
+    </div>
+  </div>
+
+  <div class="hero-title">
+    <h1>長坂坡</h1>
+    <p>· 文字合成策略塔防 ·</p>
+  </div>
+
+  <div class="main-btns">
+    <div class="mbtn c1"><div class="ico">🔥</div><div class="lab">开始战役</div></div>
+    <div class="mbtn c2"><div class="ico">🛡️</div><div class="lab">武将养成</div></div>
+    <div class="mbtn c3"><div class="ico">🛒</div><div class="lab">商店</div></div>
+    <div class="mbtn c4"><div class="ico">📖</div><div class="lab">图鉴</div></div>
+  </div>
+
+  <div class="funcbar">
+    <div class="func"><div class="fi">🗺️</div>关卡选择</div>
+    <div class="func"><div class="fi">🎉</div>活动</div>
+    <div class="func"><div class="fi">🏆</div>排行</div>
+    <div class="func"><div class="fi">⚙️</div>设置</div>
+  </div>
+
+  <div class="banner-ad">底部 Banner 广告位（750×100）</div>
+</div>
+</body>
+</html>
